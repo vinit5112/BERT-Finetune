@@ -43,7 +43,8 @@ The model has already been trained and evaluated. The training script has been e
 
 ```plaintext
 .                
-├── best_model/              
+├── best_model/ 
+├── images/              
 ├── config.py            
 ├── bert-finetune.ipynb
 ├── bert-finetune-approach2.ipynb
