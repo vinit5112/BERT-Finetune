@@ -81,13 +81,13 @@ The `ipynb` script has already been executed to train the model, and the evaluat
 
 ### For inference
 
-Since the training and evaluation have already been completed, you can simply load the saved models from the `model/` directory and use them for inference or further tasks.
+Since the training and evaluation have already been completed, you can simply load the saved models from the `best_model/` directory and use them for inference or further tasks.
 
 For example:
 ```python
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-model_path = '/kaggle/working/model' 
+model_path = 'BERT-Finetune\best_model' 
 
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
