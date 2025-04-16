@@ -45,25 +45,67 @@ The model has already been trained and evaluated. The training script has been e
 .                
 ├── models/              
 ├── config.py            
-├── bert-finetune.ipynb  
+├── bert-finetune.ipynb
+├── bert-finetune-approach2.ipynb
 ├── requirements.txt     
 └── README.md            
 ```
 
-The `train.py` script has already been executed to train the model, and the `evaluate.py` script has been used to evaluate it.
+The `ipynb` script has already been executed to train the model, and the evaluate we have implimented with wandb.
 
-### Example Usage
+### Training Results
 
-Since the training and evaluation have already been completed, you can simply load the saved models from the `models/` directory and use them for inference or further tasks.
+- **Train_loss** : 0.012415256351232529
+- **Accuracy** : 94.45416666666666%
+- **F1** : 0.9445416666666666
+
+<!-- ![Screenshot](image.png) -->
+<img src="image.png" alt="Screenshot" width="300"/>
+<img src="image1.png" alt="Screenshot" width="305"/>
+<img src="image2.png" alt="Screenshot" width="275"/>
+
+- **For more information**
+
+[**Bert-Finetune-Result**](https://api.wandb.ai/links/tavdevinit44-thinkbiz-technology-pvt/1ozrgeyd)
+
+[**Bert-Finetune-Result-Approach2**](https://api.wandb.ai/links/tavdevinit44-thinkbiz-technology-pvt/jt90rbyd)
+
+### Comparision with distilbert-base-uncased Model
+
+| Metric     | bert-base-uncased | distilbert-base-uncased |
+|------------|-------------------|--------------------------|
+| Train Loss | 0.0124            | 0.0180                   |
+| Accuracy   | 94.45%            | 94.09%                   |
+| F1 Score   | 0.9445            | 0.9410                   |
+
+
+### For inference
+
+Since the training and evaluation have already been completed, you can simply load the saved models from the `model/` directory and use them for inference or further tasks.
 
 For example:
 ```python
-from transformers import BertForSequenceClassification, BertTokenizer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-model = BertForSequenceClassification.from_pretrained("models/<your_model_name>")
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+model_path = '/kaggle/working/model' 
 
-# Example inference
-inputs = tokenizer("Example sentence for inference.", return_tensors="pt")
-outputs = model(**inputs)
+model = AutoModelForSequenceClassification.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+print(model)
+print(tokenizer)
+
+text = "Wall St. Bears Claw Back Into the Black (Reuters) Reuters - Short-sellers, Wall Street's dwindling\band of ultra-cynics, are seeing green again."
+
+inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+with torch.no_grad():
+    outputs = model(**inputs)
+
+logits = outputs.logits
+predictions = torch.argmax(logits, dim=-1)
+
+print(f"Predicted class: {predictions.item()}")
+```
+Output:
+```
+Predicted class: 2
 ```
