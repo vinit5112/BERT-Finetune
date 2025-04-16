@@ -43,7 +43,7 @@ The model has already been trained and evaluated. The training script has been e
 
 ```plaintext
 .                
-├── models/              
+├── best_model/              
 ├── config.py            
 ├── bert-finetune.ipynb
 ├── bert-finetune-approach2.ipynb
@@ -60,9 +60,9 @@ The `ipynb` script has already been executed to train the model, and the evaluat
 - **F1** : 0.9445416666666666
 
 <!-- ![Screenshot](image.png) -->
-<img src="image.png" alt="Screenshot" width="300"/>
-<img src="image1.png" alt="Screenshot" width="305"/>
-<img src="image2.png" alt="Screenshot" width="275"/>
+<img src="images/image.png" alt="Screenshot" width="300"/>
+<img src="images/image1.png" alt="Screenshot" width="305"/>
+<img src="images/image2.png" alt="Screenshot" width="275"/>
 
 - **For more information**
 
